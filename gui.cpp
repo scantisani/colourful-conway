@@ -9,6 +9,8 @@ using std::runtime_error;
 #include <string>
 using std::string; using std::to_string;
 
+#include "game.h"
+
 // Screen dimension constants
 const int SCREEN_WIDTH = 640;
 const int SCREEN_HEIGHT = 480;
@@ -81,6 +83,8 @@ void fillCell(SDL_Renderer* renderer, int x, int y) {
 
 int main(int argc, char const *argv[]) {
 	try {
+		Game game;
+
 		SDL_Event event;
 		SDL_Window* window = initWindow();
 		SDL_Renderer* renderer = initRenderer(window);
@@ -93,6 +97,7 @@ int main(int argc, char const *argv[]) {
 			SDL_PollEvent(&event);
 
 			if (event.button.type == SDL_MOUSEBUTTONDOWN) {
+				game.createCell();
 				fillCell(renderer, event.button.x, event.button.y);
 			}
 			// Refresh window
