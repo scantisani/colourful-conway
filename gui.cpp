@@ -83,7 +83,7 @@ void fillCell(SDL_Renderer* renderer, int x, int y) {
 
 int main(int argc, char const *argv[]) {
 	try {
-		Game game;
+		Game game(SCREEN_WIDTH / CELL_SIZE, SCREEN_HEIGHT / CELL_SIZE);
 
 		SDL_Event event;
 		SDL_Window* window = initWindow();
@@ -97,7 +97,7 @@ int main(int argc, char const *argv[]) {
 			SDL_PollEvent(&event);
 
 			if (event.button.type == SDL_MOUSEBUTTONDOWN) {
-				game.createCell();
+				game.toggleCell(event.button.x / CELL_SIZE, event.button.y / CELL_SIZE);
 				fillCell(renderer, event.button.x, event.button.y);
 			}
 			// Refresh window
