@@ -1,5 +1,5 @@
-OBJ = grid.cpp
-OUT = grid
+OBJ = gui.cpp
+OUT = gui
 
 CC = g++
 COMPILER_FLAGS = -Wall -std=c++11
