@@ -36,7 +36,7 @@ void initSDL() {
 }
 
 SDL_Window* initWindow() {
-	SDL_Window* window = SDL_CreateWindow("Grid", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
+	SDL_Window* window = SDL_CreateWindow("Grid", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, 0);
 	if (window == NULL) {
 		string sdl_error = SDL_GetError();
 		throw runtime_error("Window could not be created! SDL Error: " + sdl_error);
