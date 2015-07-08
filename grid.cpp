@@ -16,18 +16,6 @@ const int SCREEN_HEIGHT = 480;
 // Grid cell size constant
 const int CELL_SIZE = 10;
 
-// SDL initialization and termination functions
-void initSDL();
-void closeSDL(SDL_Window* window, SDL_Renderer* renderer);
-
-// SDL window initializer function
-SDL_Window* initWindow();
-// SDL renderer initializer function
-SDL_Renderer* initRenderer(SDL_Window* window);
-
-// function to draw the grid for the cells
-void drawGrid(SDL_Renderer* renderer);
-
 void initSDL() {
 	if (SDL_Init(SDL_INIT_VIDEO) < 0) {
 		string sdl_error = SDL_GetError();
