@@ -36,16 +36,16 @@ void Game::destroyCell(int x, int y) {
 }
 
 vector<vector <int>> Game::getFilledCells() {
-	vector<vector <int>> cell_coordinates;
+	vector<vector <int>> filledCells;
 
 	for (int i = 0; i < cells.size(); ++i) {
 		for (int j = 0; j < cells[i].size(); ++j) {
 			if (cells[i][j] == 1) { 
-				vector<int> v = { i, j };
-				cell_coordinates.push_back(v);
+				vector<int> coordinates = { i, j };
+				filledCells.push_back(coordinates);
 			}
 		}
 	}
-	
-	return cell_coordinates;
+
+	return filledCells;
 }
