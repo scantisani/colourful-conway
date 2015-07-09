@@ -94,11 +94,11 @@ int main(int argc, char const *argv[]) {
 		// While user hasn't closed the window
 		while (event.type != SDL_QUIT) {
 			// Poll for events on queue
-			SDL_PollEvent(&event);
-
-			if (event.button.type == SDL_MOUSEBUTTONDOWN) {
-				game.toggleCell(event.button.x / CELL_SIZE, event.button.y / CELL_SIZE);
-				fillCell(renderer, event.button.x, event.button.y);
+			if (SDL_PollEvent(&event)) {
+				if (event.button.type == SDL_MOUSEBUTTONDOWN) {
+					game.toggleCell(event.button.x / CELL_SIZE, event.button.y / CELL_SIZE);
+					fillCell(renderer, event.button.x, event.button.y);
+				}
 			}
 			// Refresh window
 			SDL_RenderPresent(renderer);
