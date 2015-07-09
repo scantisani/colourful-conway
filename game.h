@@ -11,6 +11,7 @@ public:
 	void toggleCell(int x, int y);
 	void createCell(int x, int y);
 	void destroyCell(int x, int y);
+	std::vector<std::vector <int>> getFilledCells();
 
 	std::vector <std::vector <bool>> cells;
 };

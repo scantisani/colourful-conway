@@ -9,6 +9,9 @@ using std::runtime_error;
 #include <string>
 using std::string; using std::to_string;
 
+#include <vector>
+using std::vector;
+
 #include "game.h"
 
 // Screen dimension constants
@@ -81,6 +84,11 @@ void fillCell(SDL_Renderer* renderer, int x, int y) {
 	SDL_RenderFillRect(renderer, &cell);
 }
 
+void drawFilledCells(SDL_Renderer* renderer, vector<vector<int>> filledCells) {
+	for (vector<int> cell : filledCells)
+		fillCell(renderer, cell[0] * CELL_SIZE, cell[1] * CELL_SIZE);
+}
+
 int main(int argc, char const *argv[]) {
 	try {
 		Game game(SCREEN_WIDTH / CELL_SIZE, SCREEN_HEIGHT / CELL_SIZE);
@@ -89,17 +97,18 @@ int main(int argc, char const *argv[]) {
 		SDL_Window* window = initWindow();
 		SDL_Renderer* renderer = initRenderer(window);
 
-		drawGrid(renderer);
-
 		// While user hasn't closed the window
 		while (event.type != SDL_QUIT) {
+			drawGrid(renderer);
+
 			// Poll for events on queue
 			if (SDL_PollEvent(&event)) {
 				if (event.button.type == SDL_MOUSEBUTTONDOWN) {
 					game.toggleCell(event.button.x / CELL_SIZE, event.button.y / CELL_SIZE);
-					fillCell(renderer, event.button.x, event.button.y);
 				}
 			}
+
+			drawFilledCells(renderer, game.getFilledCells());
 			// Refresh window
 			SDL_RenderPresent(renderer);
 		}

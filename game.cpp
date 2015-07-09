@@ -12,8 +12,6 @@ Game::Game(int grid_rows, int grid_columns) {
 	cells = vector< vector<bool> >
 	(grid_rows, vector<bool>
 		(grid_columns, 0));
-
-	cout << cells.size() << " " << cells[0].size() << endl;
 }
 
 Game::~Game() {
@@ -35,4 +33,19 @@ void Game::createCell(int x, int y) {
 void Game::destroyCell(int x, int y) {
 	cells[x][y] = 0;
 	cout << "Cell destroyed: " << x << " " << y << endl;
+}
+
+vector<vector <int>> Game::getFilledCells() {
+	vector<vector <int>> cell_coordinates;
+
+	for (int i = 0; i < cells.size(); ++i) {
+		for (int j = 0; j < cells[i].size(); ++j) {
+			if (cells[i][j] == 1) { 
+				vector<int> v = { i, j };
+				cell_coordinates.push_back(v);
+			}
+		}
+	}
+	
+	return cell_coordinates;
 }
