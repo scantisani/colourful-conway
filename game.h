@@ -9,11 +9,14 @@ public:
 	~Game();
 
 	void toggleCell(int x, int y);
-	void createCell(int x, int y);
-	void destroyCell(int x, int y);
 	std::vector<std::vector <int>> getFilledCells();
 
+private:
 	std::vector <std::vector <bool>> cells;
+	
+	void createCell(int x, int y);
+	void destroyCell(int x, int y);
+
 };
 
 #endif
