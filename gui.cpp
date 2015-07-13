@@ -95,6 +95,7 @@ void Gui::drawFilledCells(vector<vector<int>> filledCells) {
 void Gui::loop() {
 	Game game(GRID_ROWS, GRID_COLUMNS);
 	SDL_Event event;
+	bool simulating = false;
 
 	// While user hasn't closed the window
 	while (event.type != SDL_QUIT) {
@@ -102,8 +103,16 @@ void Gui::loop() {
 
 		// Poll for events on queue
 		if (SDL_PollEvent(&event)) {
-			if (event.button.type == SDL_MOUSEBUTTONDOWN) {
-				game.toggleCell(event.button.x / CELL_SIZE, event.button.y / CELL_SIZE);
+
+			if (event.type == SDL_KEYDOWN) {
+				// if the user presses the spacebar
+				if (event.key.keysym.sym == SDLK_SPACE)
+					simulating = !simulating;
+
+			} else if (event.type == SDL_MOUSEBUTTONDOWN && !simulating) {
+				// if the user clicks the left mouse button
+				if (event.button.button == SDL_BUTTON_LEFT)
+					game.toggleCell(event.button.x / CELL_SIZE, event.button.y / CELL_SIZE);
 			}
 		}
 
