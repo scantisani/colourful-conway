@@ -20,8 +20,8 @@ private:
 	// Grid cell size constant
 	const int CELL_SIZE = 10;
 
-	const int CELL_ROWS = SCREEN_WIDTH / CELL_SIZE;
-	const int CELL_COLUMNS = SCREEN_HEIGHT / CELL_SIZE;
+	const int GRID_ROWS = SCREEN_WIDTH / CELL_SIZE;
+	const int GRID_COLUMNS = SCREEN_HEIGHT / CELL_SIZE;
 
 	SDL_Window* window = NULL;
 	SDL_Renderer* renderer = NULL;

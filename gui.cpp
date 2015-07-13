@@ -93,7 +93,7 @@ void Gui::drawFilledCells(vector<vector<int>> filledCells) {
 }
 
 void Gui::loop() {
-	Game game(CELL_ROWS, CELL_COLUMNS);
+	Game game(GRID_ROWS, GRID_COLUMNS);
 	SDL_Event event;
 
 	// While user hasn't closed the window
