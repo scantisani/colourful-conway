@@ -27,12 +27,10 @@ void Game::toggleCell(int x, int y) {
 
 void Game::createCell(int x, int y) {
 	cells[x][y] = 1;
-	cout << "Cell created: " << x << " " << y << endl;
 }
 
 void Game::destroyCell(int x, int y) {
 	cells[x][y] = 0;
-	cout << "Cell destroyed: " << x << " " << y << endl;
 }
 
 vector<vector <int>> Game::getFilledCells() {
