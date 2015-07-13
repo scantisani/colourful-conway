@@ -7,11 +7,9 @@ using std::vector;
 #include "game.h"
 
 Game::Game(int grid_rows, int grid_columns) {
-	// cells is a vector of vectors of booleans; each boolean starts as 0
-	// lower-level vectors are of size [grid_columns], higher-level of size [grid_rows]
-	cells = vector< vector<bool> >
-	(grid_rows, vector<bool>
-		(grid_columns, 0));
+	cells = vector<vector<Cell>>
+	(grid_rows, vector<Cell>	// cells is a vector of size grid_rows
+		(grid_columns));		// that holds vectors (of Cells) of size grid_columns
 }
 
 Game::~Game() {
@@ -19,18 +17,18 @@ Game::~Game() {
 }
 
 void Game::toggleCell(int x, int y) {
-	if (cells[x][y] == 0)
-		createCell(x, y);
-	else
+	if (cells[x][y].alive)
 		destroyCell(x, y);
+	else
+		createCell(x, y);
 }
 
 void Game::createCell(int x, int y) {
-	cells[x][y] = 1;
+	cells[x][y].alive = true;
 }
 
 void Game::destroyCell(int x, int y) {
-	cells[x][y] = 0;
+	cells[x][y].alive = false;
 }
 
 vector<vector <int>> Game::getFilledCells() {
@@ -38,7 +36,7 @@ vector<vector <int>> Game::getFilledCells() {
 
 	for (int i = 0; i < cells.size(); ++i) {
 		for (int j = 0; j < cells[i].size(); ++j) {
-			if (cells[i][j] == 1) { 
+			if (cells[i][j].alive) { 
 				vector<int> coordinates = { i, j };
 				filledCells.push_back(coordinates);
 			}
