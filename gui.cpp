@@ -12,23 +12,26 @@ using std::string; using std::to_string;
 #include <vector>
 using std::vector;
 
+#include "gui.h"
 #include "game.h"
 
-// Screen dimension constants
-const int SCREEN_WIDTH = 640;
-const int SCREEN_HEIGHT = 480;
+Gui::Gui() {
+	window = initWindow();
+	renderer = initRenderer();
+}
 
-// Grid cell size constant
-const int CELL_SIZE = 10;
+Gui::~Gui() {
+	closeSDL();
+}
 
-void initSDL() {
+void Gui::initSDL() {
 	if (SDL_Init(SDL_INIT_VIDEO) < 0) {
 		string sdl_error = SDL_GetError();
 		throw runtime_error("SDL could not initialize! SDL Error: " + sdl_error);
 	}
 }
 
-SDL_Window* initWindow() {
+SDL_Window* Gui::initWindow() {
 	SDL_Window* window = SDL_CreateWindow("Grid", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, 0);
 	if (window == NULL) {
 		string sdl_error = SDL_GetError();
@@ -38,7 +41,7 @@ SDL_Window* initWindow() {
 	return window;
 }
 
-SDL_Renderer* initRenderer(SDL_Window* window) {
+SDL_Renderer* Gui::initRenderer() {
 	SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 	if (renderer == NULL) {
 		string sdl_error = SDL_GetError();
@@ -48,7 +51,7 @@ SDL_Renderer* initRenderer(SDL_Window* window) {
 	return renderer;
 }
 
-void closeSDL(SDL_Window* window, SDL_Renderer* renderer) {
+void Gui::closeSDL() {
 	SDL_DestroyRenderer(renderer);
 	renderer = NULL;
 	SDL_DestroyWindow(window);
@@ -57,7 +60,7 @@ void closeSDL(SDL_Window* window, SDL_Renderer* renderer) {
 	SDL_Quit();
 }
 
-void drawGrid(SDL_Renderer* renderer) {
+void Gui::drawGrid() {
 	// Clear window/draw white background
 	SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
 	SDL_RenderClear(renderer);
@@ -71,7 +74,7 @@ void drawGrid(SDL_Renderer* renderer) {
 		SDL_RenderDrawLine(renderer, i, 0, i, SCREEN_HEIGHT);
 }
 
-void fillCell(SDL_Renderer* renderer, int x, int y) {
+void Gui::fillCell(int x, int y) {
 	SDL_Rect cell;
 	// x and y are top left corner of cell mouse pointer is in
 	cell.x = x - (x % CELL_SIZE) + 1; // 1-pixel buffer so as not to erase grid lines
@@ -84,36 +87,36 @@ void fillCell(SDL_Renderer* renderer, int x, int y) {
 	SDL_RenderFillRect(renderer, &cell);
 }
 
-void drawFilledCells(SDL_Renderer* renderer, vector<vector<int>> filledCells) {
+void Gui::drawFilledCells(vector<vector<int>> filledCells) {
 	for (vector<int> cell : filledCells)
-		fillCell(renderer, cell[0] * CELL_SIZE, cell[1] * CELL_SIZE);
+		fillCell(cell[0] * CELL_SIZE, cell[1] * CELL_SIZE);
+}
+
+void Gui::loop() {
+	Game game(CELL_ROWS, CELL_COLUMNS);
+	SDL_Event event;
+
+	// While user hasn't closed the window
+	while (event.type != SDL_QUIT) {
+		drawGrid();
+
+		// Poll for events on queue
+		if (SDL_PollEvent(&event)) {
+			if (event.button.type == SDL_MOUSEBUTTONDOWN) {
+				game.toggleCell(event.button.x / CELL_SIZE, event.button.y / CELL_SIZE);
+			}
+		}
+
+		drawFilledCells(game.getFilledCells());
+		// Refresh window
+		SDL_RenderPresent(renderer);
+	}
 }
 
 int main(int argc, char const *argv[]) {
 	try {
-		Game game(SCREEN_WIDTH / CELL_SIZE, SCREEN_HEIGHT / CELL_SIZE);
-
-		SDL_Event event;
-		SDL_Window* window = initWindow();
-		SDL_Renderer* renderer = initRenderer(window);
-
-		// While user hasn't closed the window
-		while (event.type != SDL_QUIT) {
-			drawGrid(renderer);
-
-			// Poll for events on queue
-			if (SDL_PollEvent(&event)) {
-				if (event.button.type == SDL_MOUSEBUTTONDOWN) {
-					game.toggleCell(event.button.x / CELL_SIZE, event.button.y / CELL_SIZE);
-				}
-			}
-
-			drawFilledCells(renderer, game.getFilledCells());
-			// Refresh window
-			SDL_RenderPresent(renderer);
-		}
-
-		closeSDL(window, renderer);
+		Gui gui;
+		gui.loop();
 	} catch (runtime_error e) {
 		cerr << e.what() << endl;
 	}
