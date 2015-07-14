@@ -20,6 +20,7 @@ private:
 
 	void createCell(int x, int y);
 	void destroyCell(int x, int y);
+	std::vector<Cell> getLiveNeighbours(int x, int y);
 };
 
 #endif

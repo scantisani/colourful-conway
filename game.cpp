@@ -4,6 +4,9 @@ using std::cout; using std::endl;
 #include <vector>
 using std::vector;
 
+#include <map>
+using std::map;
+
 #include "game.h"
 
 Game::Game(int grid_rows, int grid_columns) {
@@ -29,6 +32,26 @@ void Game::createCell(int x, int y) {
 
 void Game::destroyCell(int x, int y) {
 	cells[x][y].alive = false;
+}
+
+vector<Game::Cell> Game::getLiveNeighbours(int x, int y) {
+	vector<Game::Cell> neighbours;
+
+	for (int i : {-1, 0, 1}) {
+		for (int j : {-1, 0, 1}) {
+			int row = x + i;
+			int col = y + j;
+
+			if (row >= 0 && row <= cells.size() - 1 &&		// check row and col are within grid limits
+				col >= 0 && col <= cells[0].size() - 1 &&
+				!(row == x && col == y)) {					// don't include the cell itself in neighbours
+				if (cells[row][col].alive)
+					neighbours.push_back(cells[row][col]);
+			}
+		}
+	}
+
+	return neighbours;
 }
 
 vector<vector <int>> Game::getFilledCells() {
