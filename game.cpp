@@ -9,10 +9,10 @@ using std::map;
 
 #include "game.h"
 
-Game::Game(int grid_rows, int grid_columns) {
+Game::Game(int gridRows, int gridColumns) {
 	cells = vector<vector<Cell>>
-	(grid_rows, vector<Cell>	// cells is a vector of size grid_rows
-		(grid_columns));		// that holds vectors (of Cells) of size grid_columns
+	(gridRows, vector<Cell>	// cells is a vector of size gridRows
+		(gridColumns));		// that holds vectors (of Cells) of size gridColumns
 }
 
 Game::~Game() {
