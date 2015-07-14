@@ -35,7 +35,7 @@ void Game::destroyCell(int x, int y) {
 }
 
 vector<Game::Cell> Game::getLiveNeighbours(int x, int y) {
-	vector<Game::Cell> neighbours;
+	vector<Cell> neighbours;
 
 	for (int i : {-1, 0, 1}) {
 		for (int j : {-1, 0, 1}) {
