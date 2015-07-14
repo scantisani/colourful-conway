@@ -9,11 +9,13 @@ public:
 	~Game();
 
 	void toggleCell(int x, int y);
+	void step();
 	std::vector<std::vector <int>> getFilledCells();
 
 private:
 	struct Cell {
 		bool alive = 0;
+		int liveNeighbours = 0;
 	};
 	
 	std::vector <std::vector <Cell>> cells;

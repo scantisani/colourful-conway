@@ -68,3 +68,25 @@ vector<vector <int>> Game::getFilledCells() {
 
 	return filledCells;
 }
+
+void Game::step() {
+	for (unsigned int i = 0; i < cells.size(); ++i) {
+		for (unsigned int j = 0; j < cells[i].size(); ++j) {
+			cells[i][j].liveNeighbours = getLiveNeighbours(i, j).size();
+		}
+	}
+
+	for (vector<Cell> &row : cells) {
+		for (Cell &cell : row) {
+			if (cell.liveNeighbours < 2) {
+				cell.alive = false;
+			}
+			else if (cell.liveNeighbours == 3) {
+				cell.alive = true;
+			}
+			else if (cell. liveNeighbours > 3) {
+				cell.alive = false;
+			}
+		}
+	}
+}

@@ -108,6 +108,8 @@ void Gui::loop() {
 				// if the user presses the spacebar
 				if (event.key.keysym.sym == SDLK_SPACE)
 					simulating = !simulating;
+				else if (event.key.keysym.sym == SDLK_n)
+					game.step();
 
 			} else if (event.type == SDL_MOUSEBUTTONDOWN && !simulating) {
 				// if the user clicks the left mouse button
