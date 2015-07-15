@@ -30,8 +30,16 @@ void Game::createCell(int x, int y) {
 	cells[x][y].alive = true;
 }
 
+void Game::createCell(Cell &cell) {
+	cell.alive = true;
+}
+
 void Game::destroyCell(int x, int y) {
 	cells[x][y].alive = false;
+}
+
+void Game::destroyCell(Cell &cell) {
+	cell.alive = false;
 }
 
 vector<Game::Cell> Game::getLiveNeighbours(int x, int y) {
@@ -79,13 +87,13 @@ void Game::step() {
 	for (vector<Cell> &row : cells) {
 		for (Cell &cell : row) {
 			if (cell.liveNeighbours < 2) {
-				cell.alive = false;
+				destroyCell(cell);
 			}
 			else if (cell.liveNeighbours == 3) {
-				cell.alive = true;
+				createCell(cell);
 			}
 			else if (cell. liveNeighbours > 3) {
-				cell.alive = false;
+				destroyCell(cell);
 			}
 		}
 	}
