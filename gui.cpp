@@ -39,7 +39,7 @@ void Gui::initSDL() {
 }
 
 SDL_Window* Gui::initWindow() {
-	SDL_Window* window = SDL_CreateWindow("Grid", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, 0);
+	SDL_Window* window = SDL_CreateWindow("Colourful Conway", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, 0);
 	if (window == NULL) {
 		string sdl_error = SDL_GetError();
 		throw runtime_error("Window could not be created! SDL Error: " + sdl_error);
