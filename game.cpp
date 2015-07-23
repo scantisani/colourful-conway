@@ -92,7 +92,7 @@ void Game::step() {
 			else if (cell.liveNeighbours == 3) {
 				createCell(cell);
 			}
-			else if (cell. liveNeighbours > 3) {
+			else if (cell.liveNeighbours > 3) {
 				destroyCell(cell);
 			}
 		}
