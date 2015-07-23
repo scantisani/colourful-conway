@@ -1,4 +1,9 @@
 #include <SDL2/SDL.h>
+
+#include <chrono>
+using std::chrono::time_point; using std::chrono::system_clock;
+using std::chrono::milliseconds;
+
 #include <iostream>
 using std::cout; using std::endl;
 using std::cerr;
@@ -18,6 +23,8 @@ using std::vector;
 Gui::Gui() {
 	window = initWindow();
 	renderer = initRenderer();
+
+	nextStepDue = system_clock::now();
 }
 
 Gui::~Gui() {
@@ -105,16 +112,29 @@ void Gui::loop() {
 		if (SDL_PollEvent(&event)) {
 
 			if (event.type == SDL_KEYDOWN) {
-				// if the user presses the spacebar
-				if (event.key.keysym.sym == SDLK_SPACE)
+				SDL_Keycode keyCode = event.key.keysym.sym;			
+
+				if (keyCode == SDLK_SPACE)
 					simulating = !simulating;
-				else if (event.key.keysym.sym == SDLK_n)
+
+				else if (keyCode == SDLK_n && !simulating)
 					game.step();
 
-			} else if (event.type == SDL_MOUSEBUTTONDOWN && !simulating) {
-				// if the user clicks the left mouse button
-				if (event.button.button == SDL_BUTTON_LEFT)
+			} else if (event.type == SDL_MOUSEBUTTONDOWN) {
+				unsigned char buttonCode = event.button.button;
+
+				if (buttonCode == SDL_BUTTON_LEFT && !simulating) {
 					game.toggleCell(event.button.x / CELL_SIZE, event.button.y / CELL_SIZE);
+				}
+			}
+		}
+
+		if (simulating) {
+			time_point<system_clock> currentTime = system_clock::now();
+
+			if (currentTime > nextStepDue) {
+				game.step();
+				nextStepDue = currentTime + milliseconds(500);
 			}
 		}
 

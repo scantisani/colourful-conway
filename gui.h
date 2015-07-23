@@ -1,6 +1,7 @@
 #ifndef GUI_H
 #define GUI_H value
 
+#include <chrono>
 #include <SDL2/SDL.h>
 #include <vector>
 using std::vector;
@@ -25,6 +26,8 @@ private:
 
 	SDL_Window* window = NULL;
 	SDL_Renderer* renderer = NULL;
+
+	std::chrono::time_point<std::chrono::system_clock> nextStepDue;
 
 	void initSDL();
 	SDL_Window* initWindow();
