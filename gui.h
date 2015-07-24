@@ -6,6 +6,8 @@
 #include <vector>
 using std::vector;
 
+#include "game.h"
+
 class Gui {
 public:
 	Gui();
@@ -34,6 +36,7 @@ private:
 	SDL_Renderer* initRenderer();
 	void closeSDL();
 
+	void drawGame(Game game);
 	void drawGrid();
 	void fillCell(int x, int y);
 	void drawFilledCells(vector<vector<int>> filledCells);

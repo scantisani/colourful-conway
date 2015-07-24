@@ -67,11 +67,19 @@ void Gui::closeSDL() {
 	SDL_Quit();
 }
 
-void Gui::drawGrid() {
+void Gui::drawGame(Game game) {
 	// Clear window/draw white background
 	SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
 	SDL_RenderClear(renderer);
 
+	drawFilledCells(game.getFilledCells());
+	drawGrid();
+
+	// Refresh window
+	SDL_RenderPresent(renderer);
+}
+
+void Gui::drawGrid() {
 	// Draw black horizontal lines
 	SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);		
 	for (int i = 0; i < SCREEN_HEIGHT; i += CELL_SIZE)
@@ -82,16 +90,16 @@ void Gui::drawGrid() {
 }
 
 void Gui::fillCell(int x, int y) {
-	SDL_Rect cell;
+	SDL_Rect gridCell;
 	// x and y are top left corner of cell mouse pointer is in
-	cell.x = x - (x % CELL_SIZE) + 1; // 1-pixel buffer so as not to erase grid lines
-	cell.y = y - (y % CELL_SIZE) + 1;
-	cell.w = CELL_SIZE - 1;
-	cell.h = CELL_SIZE - 1;
+	gridCell.x = x - (x % CELL_SIZE);
+	gridCell.y = y - (y % CELL_SIZE);
+	gridCell.w = CELL_SIZE;
+	gridCell.h = CELL_SIZE;
 
 	SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
 
-	SDL_RenderFillRect(renderer, &cell);
+	SDL_RenderFillRect(renderer, &gridCell);
 }
 
 void Gui::drawFilledCells(vector<vector<int>> filledCells) {
@@ -106,8 +114,6 @@ void Gui::loop() {
 
 	// While user hasn't closed the window
 	while (event.type != SDL_QUIT) {
-		drawGrid();
-
 		// Poll for events on queue
 		if (SDL_PollEvent(&event)) {
 
@@ -141,9 +147,7 @@ void Gui::loop() {
 			}
 		}
 
-		drawFilledCells(game.getFilledCells());
-		// Refresh window
-		SDL_RenderPresent(renderer);
+		drawGame(game);
 	}
 }
 
