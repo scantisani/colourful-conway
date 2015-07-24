@@ -69,14 +69,27 @@ vector<Game::Cell> Game::getLiveNeighbours(int x, int y) {
 	return neighbours;
 }
 
-vector<vector <int>> Game::getFilledCells() {
-	vector<vector <int>> filledCells;
+vector<map<char, int>> Game::getFilledCells() {
+	vector<map<char, int>> filledCells;
 
 	for (int i = 0; i < cells.size(); ++i) {
 		for (int j = 0; j < cells[i].size(); ++j) {
-			if (cells[i][j].alive) { 
-				vector<int> coordinates = { i, j };
-				filledCells.push_back(coordinates);
+			Cell cell = cells[i][j];
+
+			if (cell.alive) {
+				int red = (cell.dominantRedGene) ? 255 : 0;
+				int green = (cell.dominantGreenGene) ? 255 : 0;
+				int blue = (cell.dominantBlueGene) ? 255 : 0;
+
+				map<char, int> cellInfo {
+					{'x', i },
+					{'y', j },
+					{'r', red },
+					{'g', green },
+					{'b', blue },
+				};
+
+				filledCells.push_back(cellInfo);
 			}
 		}
 	}

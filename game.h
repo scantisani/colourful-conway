@@ -1,6 +1,7 @@
 #ifndef GAME_H
 #define GAME_H
 
+#include <map>
 #include <vector>
 
 class Game {
@@ -11,12 +12,16 @@ public:
 	void toggleCell(int x, int y);
 	void step();
 	void reset();
-	std::vector<std::vector <int>> getFilledCells();
+	std::vector<std::map<char, int>> getFilledCells();
 
 private:
 	struct Cell {
-		bool alive = 0;
+		bool alive = false;
 		int liveNeighbours = 0;
+
+		bool dominantRedGene = false;
+		bool dominantGreenGene = false;
+		bool dominantBlueGene = false;
 	};
 	
 	std::vector <std::vector <Cell>> cells;

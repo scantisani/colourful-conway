@@ -8,6 +8,9 @@ using std::chrono::milliseconds;
 using std::cout; using std::endl;
 using std::cerr;
 
+#include <map>
+using std::map;
+
 #include <stdexcept>
 using std::runtime_error;
 
@@ -89,22 +92,21 @@ void Gui::drawGrid() {
 		SDL_RenderDrawLine(renderer, i, 0, i, SCREEN_HEIGHT);
 }
 
-void Gui::fillCell(int x, int y) {
+void Gui::fillCell(map<char, int> cell) {
 	SDL_Rect gridCell;
-	// x and y are top left corner of cell mouse pointer is in
-	gridCell.x = x - (x % CELL_SIZE);
-	gridCell.y = y - (y % CELL_SIZE);
+
+	gridCell.x = cell['x'] * CELL_SIZE;
+	gridCell.y = cell['y'] * CELL_SIZE;
 	gridCell.w = CELL_SIZE;
 	gridCell.h = CELL_SIZE;
 
-	SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
-
+	SDL_SetRenderDrawColor(renderer, cell['r'], cell['g'], cell['b'], 255);
 	SDL_RenderFillRect(renderer, &gridCell);
 }
 
-void Gui::drawFilledCells(vector<vector<int>> filledCells) {
-	for (vector<int> cell : filledCells)
-		fillCell(cell[0] * CELL_SIZE, cell[1] * CELL_SIZE);
+void Gui::drawFilledCells(vector<map<char, int>> filledCells) {
+	for (map<char, int> cell : filledCells)
+		fillCell(cell);
 }
 
 void Gui::loop() {

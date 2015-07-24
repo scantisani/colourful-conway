@@ -3,8 +3,8 @@
 
 #include <chrono>
 #include <SDL2/SDL.h>
+#include <map>
 #include <vector>
-using std::vector;
 
 #include "game.h"
 
@@ -38,8 +38,8 @@ private:
 
 	void drawGame(Game game);
 	void drawGrid();
-	void fillCell(int x, int y);
-	void drawFilledCells(vector<vector<int>> filledCells);
+	void fillCell(std::map<char, int> cell);
+	void drawFilledCells(std::vector<std::map<char, int>> filledCells);
 };
 
 #endif
