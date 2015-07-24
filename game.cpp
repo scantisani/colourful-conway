@@ -46,7 +46,7 @@ void Game::reset() {
 	for (vector<Cell> &row : cells) {
 		for (Cell &cell : row)
 			destroyCell(cell);
-		}
+	}
 }
 
 vector<Game::Cell> Game::getLiveNeighbours(int x, int y) {
