@@ -120,6 +120,9 @@ void Gui::loop() {
 				else if (keyCode == SDLK_n && !simulating)
 					game.step();
 
+				else if (keyCode == SDLK_r && !simulating)
+					game.reset();
+
 			} else if (event.type == SDL_MOUSEBUTTONDOWN) {
 				unsigned char buttonCode = event.button.button;
 

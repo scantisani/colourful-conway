@@ -10,6 +10,7 @@ public:
 
 	void toggleCell(int x, int y);
 	void step();
+	void reset();
 	std::vector<std::vector <int>> getFilledCells();
 
 private:
