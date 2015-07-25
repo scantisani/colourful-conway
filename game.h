@@ -33,7 +33,7 @@ private:
 
 	void createCell(Cell &cell);
 	void destroyCell(Cell &cell);
-	std::vector<Cell> getLiveNeighbours(int x, int y);
+	std::vector<Cell> getLiveNeighbours(Cell &cell);
 };
 
 #endif

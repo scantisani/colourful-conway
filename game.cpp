@@ -52,19 +52,21 @@ void Game::reset() {
 	}
 }
 
-vector<Game::Cell> Game::getLiveNeighbours(int x, int y) {
+vector<Game::Cell> Game::getLiveNeighbours(Cell &cell) {
 	vector<Cell> neighbours;
 
 	for (int i : {-1, 0, 1}) {
 		for (int j : {-1, 0, 1}) {
-			int row = x + i;
-			int col = y + j;
+			int row = cell.x + i;
+			int col = cell.y + j;
 
 			if (row >= 0 && row < cells.size() &&		// check row and col are within grid limits
 				col >= 0 && col < cells[0].size() &&
-				!(row == x && col == y)) {				// don't include the cell itself in neighbours
-				if (cells[row][col].alive)
-					neighbours.push_back(cells[row][col]);
+				!(row == cell.x && col == cell.y)) {	// don't include the cell itself in neighbours
+				Cell &neighbour = cells[row][col];
+
+				if (neighbour.alive)
+					neighbours.push_back(neighbour);
 			}
 		}
 	}
@@ -101,10 +103,9 @@ vector<map<char, int>> Game::getLiveCells() {
 }
 
 void Game::step() {
-	for (unsigned int i = 0; i < cells.size(); ++i) {
-		for (unsigned int j = 0; j < cells[i].size(); ++j) {
-			cells[i][j].liveNeighbours = getLiveNeighbours(i, j).size();
-		}
+	for (vector<Cell> &row : cells) {
+		for (Cell &cell : row)
+			cell.liveNeighbours = getLiveNeighbours(cell).size();
 	}
 
 	for (vector<Cell> &row : cells) {
