@@ -29,22 +29,16 @@ Game::~Game() {
 }
 
 void Game::toggleCell(int x, int y) {
-	if (cells[x][y].alive)
-		destroyCell(x, y);
-	else
-		createCell(x, y);
-}
+	Cell &toggledCell = cells[x][y];
 
-void Game::createCell(int x, int y) {
-	cells[x][y].alive = true;
+	if (toggledCell.alive)
+		destroyCell(toggledCell);
+	else
+		createCell(toggledCell);
 }
 
 void Game::createCell(Cell &cell) {
 	cell.alive = true;
-}
-
-void Game::destroyCell(int x, int y) {
-	cells[x][y].alive = false;
 }
 
 void Game::destroyCell(Cell &cell) {

@@ -31,9 +31,7 @@ private:
 	
 	std::vector <std::vector <Cell>> cells;
 
-	void createCell(int x, int y);
 	void createCell(Cell &cell);
-	void destroyCell(int x, int y);
 	void destroyCell(Cell &cell);
 	std::vector<Cell> getLiveNeighbours(int x, int y);
 };
