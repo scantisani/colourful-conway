@@ -80,9 +80,8 @@ vector<Game::Cell> Game::getLiveNeighbours(Cell &cell) {
 vector<map<char, int>> Game::getLiveCells() {
 	vector<map<char, int>> liveCells;
 
-	for (int i = 0; i < cells.size(); ++i) {
-		for (int j = 0; j < cells[i].size(); ++j) {
-			Cell cell = cells[i][j];
+	for (vector<Cell> &row : cells) {
+		for (Cell &cell : row) {
 
 			if (cell.alive) {
 				int red = (cell.dominantRedGene) ? 255 : 0;
@@ -90,8 +89,8 @@ vector<map<char, int>> Game::getLiveCells() {
 				int blue = (cell.dominantBlueGene) ? 255 : 0;
 
 				map<char, int> cellInfo {
-					{'x', i },
-					{'y', j },
+					{'x', cell.x },
+					{'y', cell.y },
 					{'r', red },
 					{'g', green },
 					{'b', blue },
