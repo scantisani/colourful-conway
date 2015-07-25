@@ -60,9 +60,9 @@ vector<Game::Cell> Game::getLiveNeighbours(int x, int y) {
 			int row = x + i;
 			int col = y + j;
 
-			if (row >= 0 && row <= cells.size() - 1 &&		// check row and col are within grid limits
-				col >= 0 && col <= cells[0].size() - 1 &&
-				!(row == x && col == y)) {					// don't include the cell itself in neighbours
+			if (row >= 0 && row < cells.size() &&		// check row and col are within grid limits
+				col >= 0 && col < cells[0].size() &&
+				!(row == x && col == y)) {				// don't include the cell itself in neighbours
 				if (cells[row][col].alive)
 					neighbours.push_back(cells[row][col]);
 			}
