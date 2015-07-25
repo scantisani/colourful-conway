@@ -75,7 +75,7 @@ void Gui::drawGame(Game game) {
 	SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
 	SDL_RenderClear(renderer);
 
-	drawFilledCells(game.getFilledCells());
+	drawFilledCells(game.getLiveCells());
 	drawGrid();
 
 	// Refresh window

@@ -69,8 +69,8 @@ vector<Game::Cell> Game::getLiveNeighbours(int x, int y) {
 	return neighbours;
 }
 
-vector<map<char, int>> Game::getFilledCells() {
-	vector<map<char, int>> filledCells;
+vector<map<char, int>> Game::getLiveCells() {
+	vector<map<char, int>> liveCells;
 
 	for (int i = 0; i < cells.size(); ++i) {
 		for (int j = 0; j < cells[i].size(); ++j) {
@@ -89,12 +89,12 @@ vector<map<char, int>> Game::getFilledCells() {
 					{'b', blue },
 				};
 
-				filledCells.push_back(cellInfo);
+				liveCells.push_back(cellInfo);
 			}
 		}
 	}
 
-	return filledCells;
+	return liveCells;
 }
 
 void Game::step() {

@@ -12,7 +12,7 @@ public:
 	void toggleCell(int x, int y);
 	void step();
 	void reset();
-	std::vector<std::map<char, int>> getFilledCells();
+	std::vector<std::map<char, int>> getLiveCells();
 
 private:
 	struct Cell {
