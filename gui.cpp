@@ -15,7 +15,7 @@ using std::map;
 using std::runtime_error;
 
 #include <string>
-using std::string; using std::to_string;
+using std::string;
 
 #include <vector>
 using std::vector;
