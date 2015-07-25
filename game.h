@@ -16,6 +16,11 @@ public:
 
 private:
 	struct Cell {
+		const int x;
+		const int y;
+
+		Cell(int x, int y)	: x(x), y(y) {};
+
 		bool alive = false;
 		int liveNeighbours = 0;
 

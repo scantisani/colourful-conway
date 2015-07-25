@@ -10,9 +10,18 @@ using std::map;
 #include "game.h"
 
 Game::Game(int gridRows, int gridColumns) {
-	cells = vector<vector<Cell>>
-	(gridRows, vector<Cell>	// cells is a vector of size gridRows
-		(gridColumns));		// that holds vectors (of Cells) of size gridColumns
+	// initialize 'cells' vector with Cells that
+	// know their position in the vector
+	for (int i = 0; i < gridRows; ++i) {
+		vector<Cell> newCellVector;
+
+		for (int j = 0; j < gridColumns; ++j) {
+			Cell newCell = Cell(i, j);
+			newCellVector.push_back(newCell);
+		}
+
+		cells.push_back(newCellVector);
+	}
 }
 
 Game::~Game() {
