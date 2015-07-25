@@ -24,9 +24,9 @@ private:
 		bool alive = false;
 		int liveNeighbours = 0;
 
-		bool dominantRedGene = false;
-		bool dominantGreenGene = false;
-		bool dominantBlueGene = false;
+		int redGene = 0;
+		int greenGene = 0;
+		int blueGene = 0;
 	};
 	
 	std::vector <std::vector <Cell>> cells;
