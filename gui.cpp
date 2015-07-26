@@ -114,6 +114,8 @@ void Gui::loop() {
 	SDL_Event event;
 	bool simulating = false;
 
+	drawGame(game);
+
 	// While user hasn't closed the window
 	while (event.type != SDL_QUIT) {
 		// Poll for events on queue
@@ -131,12 +133,16 @@ void Gui::loop() {
 				else if (keyCode == SDLK_r && !simulating)
 					game.reset();
 
+				drawGame(game);
+
 			} else if (event.type == SDL_MOUSEBUTTONDOWN) {
 				unsigned char buttonCode = event.button.button;
 
 				if (buttonCode == SDL_BUTTON_LEFT && !simulating) {
 					game.toggleCell(event.button.x / CELL_SIZE, event.button.y / CELL_SIZE);
 				}
+
+				drawGame(game);
 			}
 		}
 
@@ -146,10 +152,11 @@ void Gui::loop() {
 			if (currentTime > nextStepDue) {
 				game.step();
 				nextStepDue = currentTime + milliseconds(500);
+				drawGame(game);
 			}
 		}
 
-		drawGame(game);
+		SDL_Delay(5);
 	}
 }
 
