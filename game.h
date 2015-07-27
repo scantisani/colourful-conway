@@ -24,9 +24,9 @@ private:
 		bool alive = false;
 		int liveNeighbours = 0;
 
-		int redGene = 0;
-		int greenGene = 0;
-		int blueGene = 0;
+		std::vector<int> redGene = { 0, 0, 0 };
+		std::vector<int> greenGene = { 0, 0, 0 };
+		std::vector<int> blueGene = { 0, 0, 0 };
 	};
 	
 	std::vector <std::vector <Cell>> cells;
