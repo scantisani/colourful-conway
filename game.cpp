@@ -41,6 +41,17 @@ void Game::createCell(Cell &cell) {
 	cell.alive = true;
 }
 
+void Game::breedCell(Cell &cell) {
+	cell.alive = true;
+
+	vector<Cell> neighbours = getLiveNeighbours(cell);
+	for (int i = 0; i < 3; ++i) {
+		cell.redGene[i] = neighbours[i].redGene[rand() % 3];
+		cell.greenGene[i] = neighbours[i].greenGene[rand() % 3];
+		cell.blueGene[i] = neighbours[i].blueGene[rand() % 3];
+	}
+}
+
 void Game::destroyCell(Cell &cell) {
 	cell.alive = false;
 }
@@ -110,17 +121,24 @@ void Game::step() {
 			cell.liveNeighbours = getLiveNeighbours(cell).size();
 	}
 
-	for (vector<Cell> &row : cells) {
-		for (Cell &cell : row) {
-			if (cell.liveNeighbours < 2) {
-				destroyCell(cell);
-			}
-			else if (cell.liveNeighbours == 3) {
-				createCell(cell);
-			}
-			else if (cell.liveNeighbours > 3) {
-				destroyCell(cell);
-			}
+	vector<vector<Cell>> newCells = cells;
+
+	for (unsigned int i = 0; i < cells.size(); ++i) {
+		for (unsigned int j = 0; j < cells[i].size(); ++j) {
+			Cell &cell = cells[i][j];
+			Cell &newCell = newCells[i][j];
+
+			if (cell.liveNeighbours < 2)
+				destroyCell(newCell);
+
+			else if (cell.liveNeighbours == 3)
+				breedCell(newCell);
+
+			else if (cell.liveNeighbours > 3)
+				destroyCell(newCell);
+
 		}
 	}
+
+	cells.swap(newCells);
 }
