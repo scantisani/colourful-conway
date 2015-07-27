@@ -134,7 +134,7 @@ void Game::step() {
 			if (cell.liveNeighbours < 2)
 				destroyCell(newCell);
 
-			else if (cell.liveNeighbours == 3)
+			else if (cell.liveNeighbours == 3 && !cell.alive)
 				breedCell(newCell);
 
 			else if (cell.liveNeighbours > 3)
