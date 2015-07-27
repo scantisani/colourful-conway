@@ -54,6 +54,9 @@ void Game::breedCell(Cell &cell) {
 
 void Game::destroyCell(Cell &cell) {
 	cell.alive = false;
+	cell.redGene = { 0, 1, 2 };
+	cell.greenGene = { 0, 1, 2 };
+	cell.blueGene = { 0, 1, 2 };
 }
 
 void Game::reset() {
