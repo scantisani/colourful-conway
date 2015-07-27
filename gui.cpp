@@ -156,7 +156,7 @@ void Gui::loop() {
 			}
 		}
 
-		SDL_Delay(5);
+		SDL_Delay(1);
 	}
 }
 
