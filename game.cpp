@@ -98,9 +98,9 @@ vector<map<char, int>> Game::getLiveCells() {
 		for (Cell &cell : row) {
 
 			if (cell.alive) {
-				uint8_t red =	cell.redGene[0]		* 127;
-				uint8_t green =	cell.greenGene[0]	* 127;
-				uint8_t blue =	cell.blueGene[0]	* 127;
+				uint8_t red =	cell.redGene[0]		* 80 + 10;
+				uint8_t green =	cell.greenGene[0]	* 80 + 10;
+				uint8_t blue =	cell.blueGene[0]	* 80 + 10;
 
 				map<char, int> cellInfo {
 					{'x', cell.x },
