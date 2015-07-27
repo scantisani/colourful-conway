@@ -92,15 +92,15 @@ void Gui::drawGrid() {
 		SDL_RenderDrawLine(renderer, i, 0, i, SCREEN_HEIGHT);
 }
 
-void Gui::fillCell(map<char, int> cell) {
+void Gui::fillCell(map<char, int> cellInfo) {
 	SDL_Rect gridCell;
 
-	gridCell.x = cell['x'] * CELL_SIZE;
-	gridCell.y = cell['y'] * CELL_SIZE;
+	gridCell.x = cellInfo['x'] * CELL_SIZE;
+	gridCell.y = cellInfo['y'] * CELL_SIZE;
 	gridCell.w = CELL_SIZE;
 	gridCell.h = CELL_SIZE;
 
-	SDL_SetRenderDrawColor(renderer, cell['r'], cell['g'], cell['b'], 255);
+	SDL_SetRenderDrawColor(renderer, cellInfo['r'], cellInfo['g'], cellInfo['b'], 255);
 	SDL_RenderFillRect(renderer, &gridCell);
 }
 
