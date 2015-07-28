@@ -20,8 +20,9 @@ using std::string;
 #include <vector>
 using std::vector;
 
-#include "gui.h"
+#include "cell.h"
 #include "game.h"
+#include "gui.h"
 
 Gui::Gui() {
 	window = initWindow();
@@ -92,20 +93,22 @@ void Gui::drawGrid() {
 		SDL_RenderDrawLine(renderer, i, 0, i, SCREEN_HEIGHT);
 }
 
-void Gui::fillCell(map<char, int> cellInfo) {
+void Gui::fillCell(Cell cell) {
 	SDL_Rect gridCell;
 
-	gridCell.x = cellInfo['x'] * CELL_SIZE;
-	gridCell.y = cellInfo['y'] * CELL_SIZE;
+	gridCell.x = cell.x * CELL_SIZE;
+	gridCell.y = cell.y * CELL_SIZE;
 	gridCell.w = CELL_SIZE;
 	gridCell.h = CELL_SIZE;
 
-	SDL_SetRenderDrawColor(renderer, cellInfo['r'], cellInfo['g'], cellInfo['b'], 255);
+	vector<int> phenotype = cell.getPhenotype();
+
+	SDL_SetRenderDrawColor(renderer, phenotype[0], phenotype[1], phenotype[2], 255);
 	SDL_RenderFillRect(renderer, &gridCell);
 }
 
-void Gui::drawFilledCells(vector<map<char, int>> filledCells) {
-	for (map<char, int> cell : filledCells)
+void Gui::drawFilledCells(vector<Cell> filledCells) {
+	for (Cell cell : filledCells)
 		fillCell(cell);
 }
 

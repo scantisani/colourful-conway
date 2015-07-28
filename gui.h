@@ -6,6 +6,7 @@
 #include <map>
 #include <vector>
 
+#include "cell.h"
 #include "game.h"
 
 class Gui {
@@ -38,8 +39,8 @@ private:
 
 	void drawGame(Game game);
 	void drawGrid();
-	void fillCell(std::map<char, int> cell);
-	void drawFilledCells(std::vector<std::map<char, int>> filledCells);
+	void fillCell(Cell cell);
+	void drawFilledCells(std::vector<Cell> filledCells);
 };
 
 #endif
