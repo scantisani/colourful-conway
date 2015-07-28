@@ -102,8 +102,11 @@ void Gui::fillCell(Cell cell) {
 	gridCell.h = CELL_SIZE;
 
 	vector<int> phenotype = cell.getPhenotype();
+	uint8_t r = phenotype[0] * 80;
+	uint8_t g = phenotype[1] * 80;
+	uint8_t b = phenotype[2] * 80;
 
-	SDL_SetRenderDrawColor(renderer, phenotype[0], phenotype[1], phenotype[2], 255);
+	SDL_SetRenderDrawColor(renderer, r, g, b, 255);
 	SDL_RenderFillRect(renderer, &gridCell);
 }
 
