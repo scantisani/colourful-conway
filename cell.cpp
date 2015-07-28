@@ -7,16 +7,16 @@ using std::vector;
 #include "cell.h"
 
 Cell::Cell(int x, int y) : x(x), y(y) {
-	genes['r'] = { 0, 0, 0 };
-	genes['g'] = { 0, 0, 0 };
-	genes['b'] = { 0, 0, 0 };
+	genes['r'] = { 2, 1, 0 };
+	genes['g'] = { 2, 1, 0 };
+	genes['b'] = { 2, 1, 0 };
 }
 
 void Cell::kill() {
 	alive = false;
-	genes['r'] = { 0, 0, 0 };
-	genes['g'] = { 0, 0, 0 };
-	genes['b'] = { 0, 0, 0 };
+	genes['r'] = { 2, 1, 0 };
+	genes['g'] = { 2, 1, 0 };
+	genes['b'] = { 2, 1, 0 };
 }
 
 void Cell::respawn() {
