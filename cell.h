@@ -11,6 +11,8 @@ public:
 	void kill();
 	void respawn();
 
+	void breed(std::vector<Cell> parents);
+
 	bool isAlive();
 	std::vector<int> getPhenotype();
 
@@ -23,6 +25,8 @@ private:
 	bool alive = false;
 
 	std::map<char, std::vector<int>> genes;
+
+	int getRandomAllele(char gene);
 };
 
 #endif

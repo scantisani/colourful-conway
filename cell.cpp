@@ -23,6 +23,16 @@ void Cell::respawn() {
 	alive = true;
 }
 
+void Cell::breed(vector<Cell> parents) {
+	alive = true;
+
+	for (int i = 0; i < 3; ++i) {
+		genes['r'][i] = parents[i].getRandomAllele('r');
+		genes['g'][i] = parents[i].getRandomAllele('g');
+		genes['b'][i] = parents[i].getRandomAllele('b');
+	}
+}
+
 bool Cell::isAlive() {
 	return alive;
 }
@@ -36,4 +46,8 @@ vector<int> Cell::getPhenotype() {
 				*max_element(g.begin(), g.end()),
 				*max_element(b.begin(), b.end())
 			};
+}
+
+int Cell::getRandomAllele(char gene) {
+	return genes[gene][rand() % 3];
 }
