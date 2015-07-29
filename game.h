@@ -17,6 +17,8 @@ public:
 	std::vector<Cell> getLiveCells();
 
 private:
+	const int GRID_ROWS, GRID_COLUMNS;
+
 	std::vector <std::vector <Cell>> cells;
 	std::vector<Cell> getLiveNeighbours(Cell &cell);
 };

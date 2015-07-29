@@ -10,13 +10,14 @@ using std::map;
 #include "cell.h"
 #include "game.h"
 
-Game::Game(int gridRows, int gridColumns) {
+Game::Game(int gridRows, int gridColumns) :	GRID_ROWS(gridRows),
+											GRID_COLUMNS(gridColumns) {
 	// initialize 'cells' vector with Cells that
 	// know their position in the vector
-	for (int i = 0; i < gridRows; ++i) {
+	for (int i = 0; i < GRID_ROWS; ++i) {
 		vector<Cell> newCellVector;
 
-		for (int j = 0; j < gridColumns; ++j) {
+		for (int j = 0; j < GRID_COLUMNS; ++j) {
 			Cell newCell = Cell(i, j);
 			newCellVector.push_back(newCell);
 		}
@@ -53,8 +54,8 @@ vector<Cell> Game::getLiveNeighbours(Cell &cell) {
 			int row = cell.x + i;
 			int col = cell.y + j;
 
-			bool withinGridLimits = (	row >= 0 && row < cells.size() &&
-										col >= 0 && col < cells[0].size()
+			bool withinGridLimits = (	row >= 0 && row < GRID_ROWS &&
+										col >= 0 && col < GRID_COLUMNS
 									);
 			bool neighbourNotItself = !(row == cell.x && col == cell.y); 
 
@@ -91,8 +92,8 @@ void Game::step() {
 
 	vector<vector<Cell>> newCells = cells;
 
-	for (unsigned int i = 0; i < cells.size(); ++i) {
-		for (unsigned int j = 0; j < cells[i].size(); ++j) {
+	for (int i = 0; i < GRID_ROWS; ++i) {
+		for (int j = 0; j < GRID_COLUMNS; ++j) {
 			Cell &cell = cells[i][j];
 			Cell &newCell = newCells[i][j];
 
