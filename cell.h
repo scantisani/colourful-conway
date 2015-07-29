@@ -16,8 +16,7 @@ public:
 	bool isAlive();
 	std::vector<int> getPhenotype();
 
-	const int x;
-	const int y;
+	const int x, y;
 
 	int liveNeighbours = 0;
 
