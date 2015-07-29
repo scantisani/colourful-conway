@@ -54,12 +54,19 @@ vector<Cell> Game::getLiveNeighbours(Cell &cell) {
 			int row = cell.x + i;
 			int col = cell.y + j;
 
-			bool withinGridLimits = (	row >= 0 && row < GRID_ROWS &&
-										col >= 0 && col < GRID_COLUMNS
-									);
+			if (row < 0)
+				row = row + GRID_ROWS;
+			else if (row >= GRID_ROWS)
+				row = GRID_ROWS - row;
+
+			if (col < 0)
+				col = col + GRID_COLUMNS;
+			else if (col >= GRID_COLUMNS)
+				col = GRID_COLUMNS - col;
+
 			bool neighbourNotItself = !(row == cell.x && col == cell.y); 
 
-			if (withinGridLimits && neighbourNotItself) {
+			if (neighbourNotItself) {
 				Cell &neighbour = cells[row][col];
 
 				if (neighbour.isAlive())
