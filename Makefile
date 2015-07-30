@@ -19,5 +19,12 @@ game.o: game.cpp
 cell.o: cell.cpp
 	$(CC) -c $(COMPILER_FLAGS) cell.cpp
 
+
+cell_test: cell_test.o cell.o
+	$(CC) cell_test.o cell.o $(LINKER_FLAGS) -o cell_test
+
+cell_test.o: cell_test.cpp
+	$(CC) -c $(COMPILER_FLAGS) cell_test.cpp
+
 clean:
-	rm *.o conway
+	rm *.o conway cell_test
