@@ -8,7 +8,7 @@ LINKER_FLAGS = -lSDL2
 all: conway
 
 conway: gui.o game.o cell.o
-	$(CC) gui.o game.o cell.o $(COMPILER_FLAGS) $(LINKER_FLAGS) -o $(OUT)
+	$(CC) gui.o game.o cell.o $(LINKER_FLAGS) -o $(OUT)
 
 gui.o: gui.cpp
 	$(CC) -c $(COMPILER_FLAGS) gui.cpp
