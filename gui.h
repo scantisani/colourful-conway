@@ -1,5 +1,5 @@
 #ifndef GUI_H
-#define GUI_H value
+#define GUI_H
 
 #include <chrono>
 #include <SDL2/SDL.h>
