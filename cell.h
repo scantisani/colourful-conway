@@ -6,6 +6,7 @@
 
 class Cell {
 public:
+	Cell(int x, int y, int seed);
 	Cell(int x, int y);
 
 	void kill();

@@ -6,13 +6,15 @@ using std::vector;
 
 #include "cell.h"
 
-Cell::Cell(int x, int y) : x(x), y(y) {
+Cell::Cell(int x, int y, int seed) : x(x), y(y) {
 	genes['r'] = { 2, 1, 0 };
 	genes['g'] = { 2, 1, 0 };
 	genes['b'] = { 2, 1, 0 };
 
-	srand(time(NULL)); // seed random number generation with current system time
+	srand(seed);
 }
+
+Cell::Cell(int x, int y) : Cell(x, y, time(NULL)) {}
 
 void Cell::kill() {
 	alive = false;
