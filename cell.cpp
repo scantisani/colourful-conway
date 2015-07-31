@@ -10,6 +10,8 @@ Cell::Cell(int x, int y) : x(x), y(y) {
 	genes['r'] = { 2, 1, 0 };
 	genes['g'] = { 2, 1, 0 };
 	genes['b'] = { 2, 1, 0 };
+
+	srand(time(NULL)); // seed random number generation with current system time
 }
 
 void Cell::kill() {
