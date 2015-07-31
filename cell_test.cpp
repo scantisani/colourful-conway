@@ -1,10 +1,4 @@
-#define BOOST_TEST_MODULE cell
-
-#include "boost/test/included/unit_test.hpp"
-#include "cell.h"
-
-#include <vector>
-using std::vector;
+#include "cell_test_headers.h"
 
 BOOST_AUTO_TEST_CASE(constructor_test) {
 	Cell cell(1, 2);
