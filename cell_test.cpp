@@ -1,6 +1,6 @@
 #include "cell_test_headers.h"
 
-BOOST_AUTO_TEST_CASE(default_constructor_test) {
+BOOST_AUTO_TEST_CASE(defaultCellConstructor_initializesCorrectValues) {
 	Cell cell(1, 2);
 
 	BOOST_CHECK_EQUAL(cell.x, 1);
@@ -16,7 +16,7 @@ BOOST_AUTO_TEST_CASE(default_constructor_test) {
 	);
 }
 
-BOOST_AUTO_TEST_CASE(seed_constructor_test) {
+BOOST_AUTO_TEST_CASE(seededCellConstructor_initializesCorrectValues) {
 	Cell cell(1, 2, 1);
 
 	BOOST_CHECK_EQUAL(cell.x, 1);
@@ -32,20 +32,20 @@ BOOST_AUTO_TEST_CASE(seed_constructor_test) {
 	);
 }
 
-BOOST_AUTO_TEST_CASE(respawn_test) {
+BOOST_AUTO_TEST_CASE(cellRespawn_makesCellAlive) {
 	Cell cell(1, 2);
 	cell.respawn();
 	BOOST_CHECK(cell.isAlive());
 }
 
-BOOST_AUTO_TEST_CASE(kill_test) {
+BOOST_AUTO_TEST_CASE(cellKill_makesCellDead) {
 	Cell cell(1, 2);
 	cell.respawn();
 	cell.kill();
 	BOOST_CHECK(!cell.isAlive());
 }
 
-BOOST_AUTO_TEST_CASE(breed_test) {
+BOOST_AUTO_TEST_CASE(cellBreed_producesGenesInCorrectRange) {
 	vector<int> seeds;
 	for (int i = 0; i < 100; ++i) { seeds.push_back(i); };
 
