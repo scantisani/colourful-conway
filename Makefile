@@ -20,14 +20,26 @@ cell.o: cell.cpp
 	$(CC) -c $(COMPILER_FLAGS) cell.cpp
 
 
+tests: cell_test game_test
+
 cell_test: cell_test.o cell.o
 	$(CC) cell_test.o cell.o $(LINKER_FLAGS) -o cell_test
+
+game_test: game_test.o game.o cell.o
+	$(CC) game_test.o game.o cell.o $(LINKER_FLAGS) -o game_test
 
 cell_test.o: cell_test.cpp cell_test_headers.h.gch
 	$(CC) -c $(COMPILER_FLAGS) cell_test.cpp
 
+game_test.o: game_test.cpp game_test_headers.h.gch
+	$(CC) -c $(COMPILER_FLAGS) game_test.cpp
+
+game_test_headers.h.gch: game_test_headers.h
+	$(CC) -c $(COMPILER_FLAGS) game_test_headers.h
+
 cell_test_headers.h.gch: cell_test_headers.h
 	$(CC) -c $(COMPILER_FLAGS) cell_test_headers.h
 
+
 clean:
-	rm *.o conway cell_test
+	rm *.o conway *_test
