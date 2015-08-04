@@ -54,15 +54,7 @@ vector<Cell> Game::getLiveNeighbours(Cell &cell) {
 			int row = cell.x + i;
 			int col = cell.y + j;
 
-			if (row < 0)
-				row = row + GRID_ROWS;
-			else if (row >= GRID_ROWS)
-				row = GRID_ROWS - row;
-
-			if (col < 0)
-				col = col + GRID_COLUMNS;
-			else if (col >= GRID_COLUMNS)
-				col = GRID_COLUMNS - col;
+			wrapAroundGrid(row, col);
 
 			bool neighbourNotItself = !(row == cell.x && col == cell.y); 
 
@@ -76,6 +68,18 @@ vector<Cell> Game::getLiveNeighbours(Cell &cell) {
 	}
 
 	return neighbours;
+}
+
+void Game::wrapAroundGrid(int &row, int &col) {
+	if (row < 0)
+		row = row + GRID_ROWS;
+	else if (row >= GRID_ROWS)
+		row = GRID_ROWS - row;
+
+	if (col < 0)
+		col = col + GRID_COLUMNS;
+	else if (col >= GRID_COLUMNS)
+		col = GRID_COLUMNS - col;
 }
 
 vector<Cell> Game::getLiveCells() {

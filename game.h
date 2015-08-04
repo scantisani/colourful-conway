@@ -21,6 +21,8 @@ private:
 
 	std::vector <std::vector <Cell>> cells;
 	std::vector<Cell> getLiveNeighbours(Cell &cell);
+
+	void wrapAroundGrid(int &row, int &col);
 };
 
 #endif
