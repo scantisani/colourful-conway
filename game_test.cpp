@@ -33,15 +33,12 @@ BOOST_AUTO_TEST_CASE(gameReset_killsAllCells) {
 	BOOST_CHECK_EQUAL(game.getLiveCells().size(), 0);
 }
 
-BOOST_AUTO_TEST_CASE(gameGetLiveCells_passesCorrectCellObjects) {
+BOOST_AUTO_TEST_CASE(gameGetLiveCells_passesLiveCells) {
 	game.toggleCell(1, 2);
-	game.toggleCell(2, 4);
-	vector<Cell> liveCells = game.getLiveCells();
+	Cell liveCell = game.getLiveCells()[0];
 
-	BOOST_CHECK_EQUAL(liveCells[0].x, 1);
-	BOOST_CHECK_EQUAL(liveCells[0].y, 2);
-	BOOST_CHECK_EQUAL(liveCells[1].x, 2);
-	BOOST_CHECK_EQUAL(liveCells[1].y, 4);
+	BOOST_CHECK_EQUAL(liveCell.x, 1);
+	BOOST_CHECK_EQUAL(liveCell.y, 2);
 }
 
 BOOST_AUTO_TEST_CASE(gameStep_killsCells_withNoNeighbours) {
