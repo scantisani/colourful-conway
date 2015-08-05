@@ -41,6 +41,24 @@ BOOST_AUTO_TEST_CASE(gameGetLiveCells_passesLiveCells) {
 	BOOST_CHECK_EQUAL(liveCell.y, 2);
 }
 
+BOOST_AUTO_TEST_CASE(gameStep_hasCellsWrapAroundGrid) {
+	game.toggleCell(0, 1);
+	game.toggleCell(0, 2);
+	game.toggleCell(0, 3);
+
+	game.step();
+
+	vector<Cell> liveCells = game.getLiveCells();
+	bool respawned = false;
+
+	for (Cell cell : liveCells) {
+		if (cell.x == 4 && cell.y == 2)
+			respawned = true;
+	}
+
+	BOOST_CHECK(respawned);
+}
+
 BOOST_AUTO_TEST_CASE(gameStep_killsCells_withNoNeighbours) {
 	game.toggleCell(1, 1);
 	game.step();
@@ -148,6 +166,84 @@ BOOST_AUTO_TEST_CASE(gameStep_killsCells_withFourNeighbours) {
 	game.toggleCell(3, 2);
 	game.toggleCell(2, 1);
 	game.toggleCell(2, 3);
+
+	game.step();
+
+	vector<Cell> liveCells = game.getLiveCells();
+
+	for (Cell cell : liveCells)
+		BOOST_CHECK(!(cell.x == 2 && cell.y == 2));
+}
+
+BOOST_AUTO_TEST_CASE(gameStep_killsCells_withFiveNeighbours) {
+	game.toggleCell(2, 2);
+
+	game.toggleCell(1, 2);
+	game.toggleCell(3, 2);
+	game.toggleCell(2, 1);
+	game.toggleCell(2, 3);
+	game.toggleCell(3, 3);
+
+	game.step();
+
+	vector<Cell> liveCells = game.getLiveCells();
+
+	for (Cell cell : liveCells)
+		BOOST_CHECK(!(cell.x == 2 && cell.y == 2));
+}
+
+BOOST_AUTO_TEST_CASE(gameStep_killsCells_withSixNeighbours) {
+	game.toggleCell(2, 2);
+
+	game.toggleCell(1, 2);
+	game.toggleCell(3, 2);
+	game.toggleCell(2, 1);
+	game.toggleCell(2, 3);
+	game.toggleCell(1, 1);
+	game.toggleCell(3, 3);
+
+	game.step();
+
+	vector<Cell> liveCells = game.getLiveCells();
+
+	for (Cell cell : liveCells)
+		BOOST_CHECK(!(cell.x == 2 && cell.y == 2));
+}
+
+BOOST_AUTO_TEST_CASE(gameStep_killsCells_withSevenNeighbours) {
+	game.toggleCell(2, 2);
+
+	game.toggleCell(1, 1);
+	game.toggleCell(1, 2);
+	game.toggleCell(1, 3);
+
+	game.toggleCell(2, 1);
+	game.toggleCell(2, 3);
+
+	game.toggleCell(3, 2);
+	game.toggleCell(3, 3);
+
+	game.step();
+
+	vector<Cell> liveCells = game.getLiveCells();
+
+	for (Cell cell : liveCells)
+		BOOST_CHECK(!(cell.x == 2 && cell.y == 2));
+}
+
+BOOST_AUTO_TEST_CASE(gameStep_killsCells_withEightNeighbours) {
+	game.toggleCell(2, 2);
+
+	game.toggleCell(1, 1);
+	game.toggleCell(1, 2);
+	game.toggleCell(1, 3);
+
+	game.toggleCell(2, 1);
+	game.toggleCell(2, 3);
+	
+	game.toggleCell(3, 1);
+	game.toggleCell(3, 2);
+	game.toggleCell(3, 3);
 
 	game.step();
 
