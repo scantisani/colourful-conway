@@ -23,7 +23,7 @@ cell.o: cell.cpp
 	$(CC) -c $(COMPILER_FLAGS) cell.cpp
 
 
-tests: cell_test game_test
+tests: cell_test game_test gui_test
 
 gui_test: gui_test.o gui.o game.o cell.o
 	$(CC) gui_test.o gui.o game.o cell.o $(LINKER_FLAGS) -o gui_test
