@@ -4,13 +4,6 @@
 using std::chrono::time_point; using std::chrono::system_clock;
 using std::chrono::milliseconds;
 
-#include <iostream>
-using std::cout; using std::endl;
-using std::cerr;
-
-#include <map>
-using std::map;
-
 #include <stdexcept>
 using std::runtime_error;
 
@@ -164,15 +157,4 @@ void Gui::loop() {
 
 		SDL_Delay(1);
 	}
-}
-
-int main(int argc, char const *argv[]) {
-	try {
-		Gui gui;
-		gui.loop();
-	} catch (runtime_error e) {
-		cerr << e.what() << endl;
-	}
-
-	return 0;
 }
