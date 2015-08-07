@@ -35,6 +35,8 @@ void Cell::breed(vector<Cell> parents) {
 		genes['g'][i] = parents[i].getRandomAllele('g');
 		genes['b'][i] = parents[i].getRandomAllele('b');
 	}
+
+	tryMutation();
 }
 
 bool Cell::isAlive() {
@@ -54,4 +56,17 @@ vector<int> Cell::getPhenotype() {
 
 int Cell::getRandomAllele(char gene) {
 	return genes[gene][rand() % 3];
+}
+
+void Cell::tryMutation() {
+	for (auto it = genes.begin(); it != genes.end(); ++it) {
+		vector<int> &gene = it->second;
+
+		for (int &allele : gene) {
+			int mutationChance = rand() % 100;
+
+			if (mutationChance >= 99)
+				allele = rand() % 3;
+		}
+	}
 }

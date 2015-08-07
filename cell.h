@@ -27,6 +27,7 @@ private:
 	std::map<char, std::vector<int>> genes;
 
 	int getRandomAllele(char gene);
+	void tryMutation();
 };
 
 #endif
